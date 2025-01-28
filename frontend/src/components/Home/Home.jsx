@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { jwtDecode} from "jwt-decode"; // Corrected import
+import { jwtDecode } from "jwt-decode"; // Corrected import
 import AdminDashboard from "../AdminDashboard/AdminDashboard";
 import SellerDashboard from "../SellerDashboard/SellerDashboard";
 
@@ -68,38 +68,44 @@ export default function Home() {
       {/* Navbar (always rendered) */}
       <nav className="bg-gray-800 text-white">
         <div className="container mx-auto flex justify-between items-center p-6">
-          {/* Bookstore Name */} 
+          {/* Bookstore Name */}
           <div className="text-2xl font-bold">
             <Link to="/">BOOK STORE</Link>
           </div>
 
-          {/* Nav Items */} 
+          {/* Nav Items */}
           <div className="flex items-center space-x-6">
             {username ? (
               <>
-                <span className="font-bold">
-                  Logged in as {role === "admin" ? "Admin" : username}
-                </span>
+                <div className="flex flex-row font-bold rounded-full bg-gray-300 text-gray-800 py-1 px-4 relative">
+                  <div className="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                    <svg className="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path>
+                    </svg>
+                  </div>
+                  <span className="ms-1 mt-2">{role === "admin" ? "Admin" : username}</span>
+                </div>
+
                 <button
                   onClick={handleLogout}
-                  className="px-4 py-2 bg-white rounded-full text-black font-bold hover:bg-black hover:text-white"
+                  className="px-4 py-2 bg-white text-black font-bold hover:bg-black hover:text-white"
                 >
                   Logout
                 </button>
               </>
             ) : (
-              <Link 
+              <Link
                 to="/login"
-                className="px-4 py-2 bg-white rounded-full text-black font-bold hover:bg-black hover:text-white"
+                className="px-4 py-2 bg-white text-black font-bold hover:bg-black hover:text-white"
               >
-                Login 
-              </Link> 
+                Login
+              </Link>
             )}
           </div>
         </div>
       </nav>
 
-      {/* Conditionally render the appropriate dashboard */} 
+      {/* Conditionally render the appropriate dashboard */}
       {role === "admin" ? (
         <AdminDashboard />
       ) : role === "seller" ? (
@@ -108,6 +114,13 @@ export default function Home() {
         <>
           {/* Home Page Content for Users */}
           <div className="h-screen flex flex-col items-center justify-center bg-gray-100">
+            <div className="w-full">
+              <img
+                src="https://cdn-v2.asla.org/uploadedImages/CMS/Shop/Bookstore/books.jpg"
+                alt="Bookstore"
+                className=" mx-auto"
+              />
+            </div>
             <div className="text-center">
               <h1 className="text-4xl font-bold text-gray-800 mb-4">
                 Welcome to the Book Store!
@@ -118,19 +131,13 @@ export default function Home() {
               </p>
               <Link
                 to="/books"
-                className="px-6 py-3 bg-gray-800 text-white rounded-lg font-semibold hover:bg-gray-700"
+                className="px-8 py-3 bg-gray-800 text-white font-semibold hover:bg-gray-700"
                 onClick={handleExploreMoreClick}
               >
                 Explore Books
               </Link>
             </div>
-            <div className="mt-10">
-              <img
-                src="https://img.freepik.com/free-vector/book-store-concept-illustration_114360-7954.jpg"
-                alt="Bookstore"
-                className="w-2/3 mx-auto"
-              />
-            </div>
+
           </div>
         </>
       )}

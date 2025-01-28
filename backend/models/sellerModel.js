@@ -4,7 +4,8 @@ const bcrypt = require('bcrypt');
 const SellerSchema = new mongoose.Schema({
     name: { type: String, required: true, trim: true},
     DOB: { type: Date, required: true }, 
-    gender: { type: String, enum: ['Male', 'Female', 'Other'], required: true },
+    role: {type: String, enum: ['User', 'Seller'], required: true},
+    gender: { type: String, enum: ['Male', 'Female'], required: true },
     email: { type: String, required: true, unique: true, match: /.+\@.+\..+/ },
     phone: { type: Number, required: true, match: /^[0-9]{10}$/, unique: true },
     address: { type: String, required: true },

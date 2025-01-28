@@ -4,14 +4,14 @@ const bcrypt = require('bcrypt');
 require('dotenv').config();
 
 const addSeller = async (req, res) => {
-    const { name, DOB, gender,  phone, email, address, password  } = req.body;
+    const { name, DOB, role, gender,  phone, email, address, password  } = req.body;
 
     try {
         const existingSeller = await Seller.findOne({ email });
         if (existingSeller) {
             return res.status(400).json({ message: 'Email already exists' });
         }
-        const seller = await Seller.create({ name, DOB, gender,  phone, email, address, password });
+        const seller = await Seller.create({ name, DOB, role, gender,  phone, email, address, password });
         console.log(seller);
         res.status(200).json({ message: 'Seller registered successfully' });
     } catch (err) {

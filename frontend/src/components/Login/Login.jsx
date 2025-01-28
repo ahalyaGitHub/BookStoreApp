@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import Nav from "../Navbar/Nav";
 
 export default function Login() {
     const [role, setRole] = useState("user");
@@ -54,8 +55,10 @@ export default function Login() {
     };
 
     return (
-        <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-r from-blue-200 to-sky-300">
-            <div className="bg-white shadow-lg rounded-lg w-11/12 sm:w-96 p-8">
+        <>
+        <Nav />
+        <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
+            <div className="bg-white shadow-lg w-11/12 sm:w-96 p-8">
 
 
                 {/* Role Selection */}
@@ -65,7 +68,7 @@ export default function Login() {
                             key={r}
                             onClick={() => setRole(r)}
                             className={`py-2 px-4 w-full text-center font-semibold  transition ${role === r
-                                ? "bg-blue-500 text-white"
+                                ? "bg-gray-800 text-white"
                                 : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                                 }`}
                         >
@@ -83,14 +86,14 @@ export default function Login() {
                     <input
                         type="email"
                         placeholder="Email"
-                        className="w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-gray-300"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <input
                         type="password"
                         placeholder="Password"
-                        className="w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-gray-300"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
@@ -99,18 +102,18 @@ export default function Login() {
                     )}
                     <button
                         type="submit"
-                        className="w-full py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition"
+                        className="w-full py-2 bg-gray-800 text-white font-bold hover:bg-gray-300 hover:text-gray-800 transition"
                     >
-                        Log In
+                        Login
                     </button>
                 </form>
 
                 {/* Navigation Links */}
                 <div className="mt-4 text-center text-sm text-gray-500">
                     {role === "admin" ? (
-                        <Link to="/login" className="text-blue-500 hover:underline">
-                            Switch to User Login
-                        </Link>
+                        <>
+                            
+                        </>
                     ) : (
                         <div>
                             <span>Don’t have an account? </span>
@@ -123,5 +126,6 @@ export default function Login() {
                 </div>
             </div>
         </div>
+        </>
     );
 }

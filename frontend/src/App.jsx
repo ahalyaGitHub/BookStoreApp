@@ -12,6 +12,7 @@ import AdminUserDetails from './components/AdminUserDetails/AdminUserDetails';
 import AdminSellerDetails from './components/AdminSellerDetails/AdminSellerDetails';
 import AdminOrderDetails from './components/AdminOrderDetails/AdminOrderDetails';
 import AdminProductDetails from './components/AdminProductDetails/AdminProductDetails';
+import Signup from './components/Signup/Signup';
 
 
 const ProtectedRoute = ({ children }) => {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/adminSellerDetails" element={<AdminSellerDetails />} />
           <Route path="/adminOrderDetails" element={<AdminOrderDetails />} />
           <Route path="/adminProductDetails" element={<AdminProductDetails />} />
+          <Route path="/signup" element={<Signup />} />
 
           <Route path="/adminDashboard" element={
             <AdminDashboard />

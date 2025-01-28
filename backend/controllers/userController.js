@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const addUser = async (req, res) => {
-    const { name, DOB, gender, phone, email, address, password } = req.body;
+    const { name, DOB, gender,role, phone, email, address, password } = req.body;
 
     try {
         // Check if email already exists
@@ -13,7 +13,7 @@ const addUser = async (req, res) => {
         }
 
         // Hash the password before saving the user
-        const user = new User({ name, DOB, gender, phone, email, address, password }); // Do not hash here
+        const user = new User({ name, DOB, gender,role, phone, email, address, password }); // Do not hash here
         await user.save(); // Password will be hashed in the pre-save hook
         console.log(user);
         res.status(200).json({ message: 'User registered successfully' });

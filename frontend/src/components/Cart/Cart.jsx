@@ -88,7 +88,7 @@ const Cart = () => {
           <>
             <div className="flex flex-wrap gap-4 mb-4">
               {cartItems.map((item) => (
-                <div key={item._id} className="flex flex-col items-center border p-4 rounded-lg shadow-lg w-60">
+                <div key={item._id} className="flex flex-col items-center border p-4 shadow-lg w-60">
                   <img
                     src={item.productId.imageUrl || 'Image Loading'}
                     alt={item.productId.name}
@@ -101,7 +101,7 @@ const Cart = () => {
                   <p className="mt-4 font-semibold text-lg">₹{item.productId.price}</p>
                   <button
                     onClick={() => removeFromCart(item._id)}
-                    className="mt-4 bg-red-500 text-white py-2 px-4 rounded-md"
+                    className="mt-4 bg-red-500 text-white py-1 px-4"
                   >
                     Remove from Cart
                   </button>
@@ -113,7 +113,7 @@ const Cart = () => {
               <p className="font-bold text-lg">Total: ₹{totalAmount}</p>
               <button
                 onClick={placeOrder}
-                className="bg-green-500 text-white py-2 px-4 rounded-md"
+                className="bg-gray-800 text-white py-2 px-4 font-bold"
               >
                 Place Order
               </button>
