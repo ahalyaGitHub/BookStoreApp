@@ -1,4 +1,4 @@
-const mongoose= required('mongoose');
+const mongoose= require('mongoose');
 
 const OrderSchema = new mongoose.Schema({
     userId:{
@@ -7,11 +7,11 @@ const OrderSchema = new mongoose.Schema({
         required: true,
     },
     productId:{
-        type: mongoose.Schema.Type.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Product',
         required: true,
     },
-    status: { type: String, enum: ['Ordered', 'Shipped', 'Delivered', 'Cancelled']},
+    status: { type: String, enum: ['Add to cart' ,'Ordered', 'Shipped', 'Delivered', 'Cancelled']},
     orderedDate:{ type: Date},
     shippedDate: { type: Date},
     deliveredDate: {type:Date},

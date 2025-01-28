@@ -11,19 +11,20 @@ const SellerSchema = new mongoose.Schema({
     password: { type: String, required: true },
 });
 
-SellerSchema.pre('save', async function(next) {
-    if(!this.isModified('password')) return next();
+SellerSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) return next(); // Skip hashing if the password hasn't changed
 
     try {
-        const salt= await bcrypt.genSalt(10);
+        const salt = await bcrypt.genSalt(10); // Generate salt
         console.log("Generated Salt:", salt);
-        this.password = await bcrypt.hash(this.password);
-        next();
+        this.password = await bcrypt.hash(this.password, salt); // Hash the password with the generated salt
+        next(); // Proceed to save the document
     } catch (error) {
         console.log("Hashing Error:", error);
-        next(error);
+        next(error); // Pass the error to the next middleware
     }
 });
+
 
 const Seller = mongoose.model('Seller', SellerSchema, 'sellers');
 module.exports = Seller;

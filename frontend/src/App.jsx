@@ -1,33 +1,57 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react'
+import Home from './components/Home/Home'
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Login from './components/Login/Login';
+import AdminDashboard from './components/AdminDashboard/AdminDashboard';
+import SellerDashboard from './components/SellerDashboard/SellerDashboard';
+import ExploreBooks from './components/ExploreBooks/ExploreBooks';
+import Cart from './components/Cart/Cart';
+import SellerBookList from './components/SellerBookList/SellerBookList';
+import SellerOrderList from './components/SellerOrderList/SellerOrderList';
+import AdminUserDetails from './components/AdminUserDetails/AdminUserDetails';
+import AdminSellerDetails from './components/AdminSellerDetails/AdminSellerDetails';
+import AdminOrderDetails from './components/AdminOrderDetails/AdminOrderDetails';
+import AdminProductDetails from './components/AdminProductDetails/AdminProductDetails';
+
+
+const ProtectedRoute = ({ children }) => {
+  const isLoggedIn = !!localStorage.getItem('token'); // Check if user is logged in
+  return isLoggedIn ? children : <Navigate to="/login" replace />;
+}
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/sellerBookList" element={<SellerBookList />} />
+          <Route path="/sellerOrderList" element={<SellerOrderList />} />
+          <Route path="/adminUserDetails" element={<AdminUserDetails />} />
+          <Route path="/adminSellerDetails" element={<AdminSellerDetails />} />
+          <Route path="/adminOrderDetails" element={<AdminOrderDetails />} />
+          <Route path="/adminProductDetails" element={<AdminProductDetails />} />
+
+          <Route path="/adminDashboard" element={
+            <AdminDashboard />
+          } />
+          <Route path="/sellerDashboard" element={<SellerDashboard />} />
+          <Route path="/books" element={
+            <ProtectedRoute>
+              <ExploreBooks />
+            </ProtectedRoute>
+          } />
+          <Route path="/cart" element={
+            <ProtectedRoute>
+              <Cart />
+            </ProtectedRoute>
+          } />
+        </Routes>
+      </Router>
+
     </>
   )
 }

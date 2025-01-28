@@ -6,9 +6,11 @@ const ProductSchema = new mongoose.Schema({
         ref: 'Seller',
         required: true
     },
+    imageUrl: {type: String},
     name: { type:String, required: true},
     author: { type: String, required: true},
-    discription: {type: String, required: true},
+    genre: { type: String, required: true },
+    description: {type: String, required: true},
     price: { type: String, required: true},
     postDate: {type: Date},
 });
