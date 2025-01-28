@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode'; // Fix import typo
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,43 +10,56 @@ const ExploreBooks = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [isOpen, setIsOpen] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
 
     const token = localStorage.getItem('token');
     const decoded = jwtDecode(token);
     const userId = decoded.id;
 
+    const fetchBooks = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/product/');
+            setBooks(response.data.products);
+            setLoading(false);
+        } catch (err) {
+            setError('Failed to load books');
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
-        // Fetch all products (books) from the backend
-        const fetchBooks = async () => {
+        const fetchFilteredBooks = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/product/');
-                console.log(response.data.products);
-                setBooks(response.data.products);
-                setLoading(false);
-            } catch (err) {
-                setError('Failed to load books');
-                setLoading(false);
+                const response = await axios.get(`http://localhost:5000/product/search?search=${searchTerm}`);
+                setBooks(response.data);
+            } catch (error) {
+                toast.error('Error fetching search results');
             }
         };
 
-        fetchBooks();
-    }, []);
+        if (searchTerm) {
+            fetchFilteredBooks();
+        } else {
+            fetchBooks();
+        }
+    }, [searchTerm]);
+
+    const handleSearch = (e) => {
+        setSearchTerm(e.target.value);
+    };
 
     const addToCart = async (bookId) => {
         try {
             const response = await axios.post('http://localhost:5000/order/add-to-cart', { userId, productId: bookId });
-            toast.success(response.data.message); // Show success message
+            toast.success(response.data.message); 
         } catch (error) {
             if (error.response && error.response.status === 400) {
-                // If the product is already in the cart
                 toast.error(error.response.data.message);
             } else {
-                // Handle other errors
                 toast.error('Failed to add to cart');
             }
         }
     };
-    
 
     if (loading) return <div>Loading books...</div>;
     if (error) return <div>{error}</div>;
@@ -56,7 +69,6 @@ const ExploreBooks = () => {
             <ToastContainer />
             <nav className="bg-gray-800 text-white">
                 <div className="container mx-auto flex justify-between items-center p-6">
-                    {/* Bookstore Name */}
                     <div className="text-2xl font-bold">
                         <Link to="/">BOOK STORE</Link>
                     </div>
@@ -68,7 +80,6 @@ const ExploreBooks = () => {
                         View Cart
                     </Link>
 
-                    {/* Hamburger Icon */}
                     <div className="md:hidden">
                         <button
                             onClick={() => setIsOpen(!isOpen)}
@@ -90,20 +101,23 @@ const ExploreBooks = () => {
                             </svg>
                         </button>
                     </div>
-
-                    {/* Nav Items */}
-                    <div
-                        className={`md:flex items-center space-x-6 ${isOpen ? "block" : "hidden"
-                            } md:block`}
-                    >
-                    </div>
                 </div>
             </nav>
 
-
-
             <div className="container mx-auto p-4">
                 <h1 className="text-2xl font-bold mb-4">Explore Books</h1>
+
+                {/* Search Bar */}
+                <div className="mb-6">
+                    <input
+                        type="text"
+                        placeholder="Search by book name, genre, or author..."
+                        className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-300"
+                        value={searchTerm}
+                        onChange={handleSearch}
+                    />
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {books.map((book) => (
                         <div key={book._id} className="border p-4 shadow-lg">
@@ -123,7 +137,6 @@ const ExploreBooks = () => {
                             >
                                 Add to Cart
                             </button>
-                            
                         </div>
                     ))}
                 </div>
@@ -131,4 +144,5 @@ const ExploreBooks = () => {
         </>
     );
 };
+
 export default ExploreBooks;

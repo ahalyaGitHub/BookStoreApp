@@ -79,19 +79,29 @@ const deleteProduct = async (req, res) => {
 
 const searchProducts = async (req, res) => {
     const searchQuery = req.query.search;
+
+    if (!searchQuery) {
+        return res.status(400).json({ error: 'Search query is required' });
+    }
+
     try {
+        // Using $regex for case-insensitive search across multiple fields
         const products = await Product.find({
             $or: [
                 { name: { $regex: searchQuery, $options: 'i' } },
                 { genre: { $regex: searchQuery, $options: 'i' } },
                 { author: { $regex: searchQuery, $options: 'i' } },
-            ]
+            ],
         });
-        res.status(200).json(products);
+
+        // Always send back in a structured way
+        res.status(200).json({ products });
     } catch (error) {
+        console.error('Error fetching products:', error);
         res.status(500).json({ error: 'Error fetching products' });
     }
 };
+
 
 const getSellerProducts = async (req, res) => {
     try {

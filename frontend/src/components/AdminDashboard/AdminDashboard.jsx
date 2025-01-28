@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from "chart.js";
-
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
 export default function AdminDashboard() {
   const [userCount, setUserCount] = useState(0);
@@ -57,13 +53,13 @@ export default function AdminDashboard() {
 
         {/* Product Details Box */}
         <div className="p-6 bg-white rounded-lg shadow-lg border border-gray-200">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">Product Details</h2>
-          <p className="text-gray-600 mb-4">Total Products: {productCount}</p>
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">Book Details</h2>
+          <p className="text-gray-600 mb-4">Total Books: {productCount}</p>
           <Link
             to="/adminProductDetails"
             className="inline-block px-6 py-3 bg-yellow-600 text-white hover:bg-yellow-700"
           >
-            Manage Products
+            Manage Books
           </Link>
         </div>
 
@@ -79,14 +75,7 @@ export default function AdminDashboard() {
           </Link>
         </div>
       </div>
-
-      {/* Optional: Graphical Representation (You can add graphs if required) */}
-      {/* <div className="flex justify-between space-x-6">
-        <div className="w-1/2 p-6 bg-white rounded-lg shadow-lg border border-gray-200">
-          <h3 className="text-xl font-semibold text-gray-800 mb-4">Some Graph Here</h3>
-          <Bar data={graphData} />
-        </div>
-      </div> */}
+      
     </div>
-  );
+  ); 
 }

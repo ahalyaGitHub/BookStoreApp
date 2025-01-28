@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Nav from '../Navbar/Nav';
 
 export default function AdminUserDetails() {
   const [users, setUsers] = useState([]);
@@ -18,19 +19,21 @@ export default function AdminUserDetails() {
   };
 
   return (
+    <>
+    <Nav />
     <div className="container mx-auto p-6 space-y-6">
-      <h1 className="text-3xl font-semibold text-gray-800 mb-4">User Details</h1>
+      <h1 className="text-2xl font-bold text-gray-800 mb-4">User Details</h1>
       
       {/* User Table */}
       <div className="overflow-x-auto bg-white shadow-lg border border-gray-200">
         <table className="min-w-full table-auto">
-          <thead className="bg-gray-100">
+          <thead className="bg-gray-300">
             <tr>
               <th className="px-6 py-3 text-left">User ID</th>
               <th className="px-6 py-3 text-left">Name</th>
               <th className="px-6 py-3 text-left">Email</th>
-              <th className="px-6 py-3 text-left">Registration Date</th>
-              <th className="px-6 py-3 text-left">Status</th>
+              <th className="px-6 py-3 text-left">Address</th>
+              <th className="px-6 py-3 text-left">Phone</th>
             </tr>
           </thead>
           <tbody>
@@ -39,13 +42,14 @@ export default function AdminUserDetails() {
                 <td className="px-6 py-3">{user._id}</td>
                 <td className="px-6 py-3">{user.name}</td>
                 <td className="px-6 py-3">{user.email}</td>
-                <td className="px-6 py-3">{new Date(user.createdAt).toLocaleDateString()}</td>
-                <td className="px-6 py-3">{user.status}</td>
+                <td className="px-6 py-3">{user.address}</td>
+                <td className="px-6 py-3">{user.phone}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
     </div>
+    </>
   );
 }

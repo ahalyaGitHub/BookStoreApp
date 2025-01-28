@@ -23,6 +23,7 @@ router.put('/:id', upload.single('image'), productController.updateProduct);
 router.delete('/:id', productController.deleteProduct);
 router.get('/search', productController.searchProducts);
 router.get('/seller/:sellerId', productController.getSellerProducts);
-router.get('/count/:sellerId', productController.sellerProductCount)
+router.get('/count/:sellerId', productController.sellerProductCount);
+
 
 module.exports = router;

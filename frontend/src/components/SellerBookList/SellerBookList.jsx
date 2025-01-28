@@ -109,14 +109,14 @@ export default function SellerBooksPage() {
                 <h1 className="text-2xl font-bold mb-4">Your Books</h1>
                 <button
                     onClick={() => setShowForm(!showForm)}
-                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                    className="px-6 py-2 bg-gray-800 text-white font-bold"
                 >
                     {showForm ? 'Close Form' : 'Add Book'}
                 </button>
 
                 {showForm && (
                     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
-                        <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full">
+                        <div className="bg-white shadow-lg p-6 max-w-md w-full">
                             <h2 className="text-xl font-bold mb-4">
                                 {editMode ? 'Edit Book' : 'Add Book'}
                             </h2>
@@ -127,7 +127,7 @@ export default function SellerBooksPage() {
                                     placeholder="Book Name"
                                     value={formData.name}
                                     onChange={handleInputChange}
-                                    className="w-full p-2 border border-gray-300 rounded"
+                                    className="w-full p-2 border border-gray-300"
                                     required
                                 />
                                 <input
@@ -136,7 +136,7 @@ export default function SellerBooksPage() {
                                     placeholder="Author"
                                     value={formData.author}
                                     onChange={handleInputChange}
-                                    className="w-full p-2 border border-gray-300 rounded"
+                                    className="w-full p-2 border border-gray-300 "
                                     required
                                 />
                                 <input
@@ -145,7 +145,7 @@ export default function SellerBooksPage() {
                                     placeholder="Genre"
                                     value={formData.genre}
                                     onChange={handleInputChange}
-                                    className="w-full p-2 border border-gray-300 rounded"
+                                    className="w-full p-2 border border-gray-300 "
                                     required
                                 />
                                 <textarea
@@ -153,7 +153,7 @@ export default function SellerBooksPage() {
                                     placeholder="Description"
                                     value={formData.description}
                                     onChange={handleInputChange}
-                                    className="w-full p-2 border border-gray-300 rounded"
+                                    className="w-full p-2 border border-gray-300 "
                                     required
                                 ></textarea>
                                 <input
@@ -162,25 +162,25 @@ export default function SellerBooksPage() {
                                     placeholder="Price"
                                     value={formData.price}
                                     onChange={handleInputChange}
-                                    className="w-full p-2 border border-gray-300 rounded"
+                                    className="w-full p-2 border border-gray-300 "
                                     required
                                 />
                                 <input
                                     type="file"
                                     onChange={handleFileChange}
-                                    className="w-full p-2 border border-gray-300 rounded"
+                                    className="w-full p-2 border border-gray-300 "
                                 />
                                 <div className="flex justify-end space-x-4">
                                     <button
                                         type="button"
                                         onClick={() => setShowForm(false)}
-                                        className="px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400"
+                                        className="px-4 py-2 bg-gray-300 text-black hover:bg-gray-400"
                                     >
                                         Cancel
                                     </button>
                                     <button
                                         type="submit"
-                                        className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+                                        className="px-4 py-2 bg-gray-800 text-white hover:bg-gray-600"
                                     >
                                         {editMode ? 'Update Book' : 'Add Book'}
                                     </button>
@@ -192,7 +192,7 @@ export default function SellerBooksPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {books.map((book) => (
-                        <div key={book._id} className="p-4 border rounded shadow">
+                        <div key={book._id} className="p-4 border shadow">
                             <h3 className="text-xl font-bold">{book.name}</h3>
 
                             {book.imageUrl && (
