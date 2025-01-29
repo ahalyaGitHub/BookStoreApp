@@ -39,24 +39,23 @@ export default function AdminOrderDetails() {
                 <th className="px-6 py-3 text-left">Seller Name</th>
                 <th className="px-6 py-3 text-left">Status</th>
                 <th className="px-6 py-3 text-left">Order Date</th>
-                <th className="px-6 py-3 text-left">Total Amount</th>
+                <th className="px-6 py-3 text-left">Amount</th>
               </tr>
             </thead>
             <tbody>
               {orders
-                .filter((order) => order.status === "Ordered") // Filter the orders based on status
                 .map((order) => (
                   <tr key={order._id} className="border-t">
                     <td className="px-6 py-3">{order._id}</td>
-                    <td className="px-6 py-3">{order.productId}</td> {/* Assuming productId is the book ID */}
-                    <td className="px-6 py-3">{order.productId}</td> {/* Add actual book name here */}
-                    <td className="px-6 py-3">{order.userId}</td> {/* Assuming userId is the customer ID */}
-                    <td className="px-6 py-3">{order.userId}</td> {/* Add actual customer name here */}
-                    <td className="px-6 py-3">{order.sellerId}</td> {/* Assuming sellerId is the seller ID */}
-                    <td className="px-6 py-3">{order.sellerId}</td> {/* Add actual seller name here */}
+                    <td className="px-6 py-3">{order.productId?._id}</td> 
+                    <td className="px-6 py-3">{order.productId?.name}</td> 
+                    <td className="px-6 py-3">{order.userId?._id}</td> 
+                    <td className="px-6 py-3">{order.userId?.name}</td> 
+                    <td className="px-6 py-3">{order.productId?.sellerId?._id}</td> 
+                    <td className="px-6 py-3">{order.productId?.sellerId?.name}</td> 
                     <td className="px-6 py-3">{order.status}</td>
-                    <td className="px-6 py-3">{order.orderedDate}</td>
-                    <td className="px-6 py-3">₹{order.totalAmount}</td>
+                    <td className="px-6 py-3">{order.orderedDate || "-"}</td>
+                    <td className="px-6 py-3">₹{order.productId?.price}</td>
                   </tr>
                 ))}
             </tbody>

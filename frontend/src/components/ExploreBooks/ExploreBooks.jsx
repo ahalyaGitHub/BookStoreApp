@@ -31,7 +31,7 @@ const ExploreBooks = () => {
         const fetchFilteredBooks = async () => {
             try {
                 const response = await axios.get(`http://localhost:5000/product/search?search=${searchTerm}`);
-                setBooks(response.data);
+                setBooks(response.data.products);
             } catch (error) {
                 toast.error('Error fetching search results');
             }
@@ -112,7 +112,7 @@ const ExploreBooks = () => {
                     <input
                         type="text"
                         placeholder="Search by book name, genre, or author..."
-                        className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-300"
+                        className="w-full p-2 border focus:outline-none focus:ring-2 focus:ring-gray-300"
                         value={searchTerm}
                         onChange={handleSearch}
                     />

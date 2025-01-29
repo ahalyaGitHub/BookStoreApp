@@ -115,9 +115,12 @@ const sellerOrderCount =async (req, res) => {
 
 const getAllOrders = async (req, res) => {
     try {
-      // Fetch all orders from the database
-      const orders = await Order.find(); 
-      // Send the response containing the orders data
+        const orders = await Order.find()
+        .populate({
+          path: 'productId',
+          populate: { path: 'sellerId', model: 'Seller' }
+        })
+        .populate('userId');
       res.json({ orders });
     } catch (error) {
       console.error('Error fetching orders:', error);

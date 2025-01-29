@@ -113,7 +113,7 @@ export default function Home() {
       ) : (
         <>
           {/* Home Page Content for Users */}
-          <div className="h-screen flex flex-col items-center justify-center bg-gray-100">
+          <div className="h-screen flex flex-row items-center justify-center bg-gray-100">
             <div className="w-full">
               <img
                 src="https://cdn-v2.asla.org/uploadedImages/CMS/Shop/Bookstore/books.jpg"
@@ -121,9 +121,9 @@ export default function Home() {
                 className=" mx-auto"
               />
             </div>
-            <div className="text-center">
+            <div className="">
               <h1 className="text-4xl font-bold text-gray-800 mb-4">
-                Welcome to the Book Store!
+                Explore yourself in a Great Books!
               </h1>
               <p className="text-gray-600 text-lg mb-8">
                 Discover a world of knowledge and adventure in our vast
@@ -134,7 +134,7 @@ export default function Home() {
                 className="px-8 py-3 bg-gray-800 text-white font-semibold hover:bg-gray-700"
                 onClick={handleExploreMoreClick}
               >
-                Explore Books
+                Get started
               </Link>
             </div>
 
