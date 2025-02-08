@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { jwtDecode } from 'jwt-decode'; // Fix import typo
+import  { jwtDecode }  from 'jwt-decode'; // Fix import typo
 import axios from 'axios';
 import { jsPDF } from 'jspdf';
 import Nav from '../Navbar/Nav';
@@ -7,7 +7,7 @@ import Nav from '../Navbar/Nav';
 export default function SellerOrdersPage() {
     const [orders, setOrders] = useState([]);
     const token = localStorage.getItem('token');
-    const decoded = jwtDecode(token);
+    const decoded = { jwtDecode }(token);
     const sellerId = decoded.id;
 
     useEffect(() => {

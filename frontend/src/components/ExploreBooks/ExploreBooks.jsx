@@ -13,7 +13,7 @@ const ExploreBooks = () => {
     const [searchTerm, setSearchTerm] = useState("");
 
     const token = localStorage.getItem('token');
-    const decoded = jwtDecode(token);
+    const decoded = { jwtDecode }(token);
     const userId = decoded.id;
 
     const fetchBooks = async () => {

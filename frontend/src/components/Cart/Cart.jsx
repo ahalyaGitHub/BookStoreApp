@@ -12,7 +12,7 @@ const Cart = () => {
   const [totalAmount, setTotalAmount] = useState(0);
 
   const token = localStorage.getItem('token');
-  const decoded = jwtDecode(token);
+  const decoded = { jwtDecode }(token);
   const userId = decoded.id; // Replace with the actual user ID
 
   useEffect(() => {

@@ -20,7 +20,7 @@ export default function SellerBooksPage() {
     const [editingBookId, setEditingBookId] = useState(null);
 
     const token = localStorage.getItem('token');
-    const decoded = jwtDecode(token);
+    const decoded = { jwtDecode }(token);
     const sellerId = decoded.id; // Assuming the seller ID is encoded in the token
 
     // Fetch seller's books

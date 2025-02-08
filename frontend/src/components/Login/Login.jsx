@@ -44,7 +44,7 @@ export default function Login() {
             localStorage.setItem("role", userRole);
 
            
-                navigate("/");
+            navigate("/");
             
 
           
