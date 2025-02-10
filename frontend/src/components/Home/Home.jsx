@@ -19,7 +19,7 @@ export default function Home() {
         setRole(role);
 
         if (role !== "admin") {
-          fetch(`http://localhost:5000/${role}/${id}`, {
+          fetch(`https://bookstoreapp-vftf.onrender.com/${role}/${id}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

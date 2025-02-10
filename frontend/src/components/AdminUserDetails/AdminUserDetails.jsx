@@ -10,7 +10,7 @@ export default function AdminUserDetails() {
 
   const fetchUserData = async () => {
     try {
-      const response = await fetch("http://localhost:5000/user/");
+      const response = await fetch("https://bookstoreapp-vftf.onrender.com/user/");
       const data = await response.json();
       setUsers(data.users); // Assuming the response contains an array of users
     } catch (error) {

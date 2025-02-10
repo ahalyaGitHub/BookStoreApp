@@ -18,7 +18,7 @@ const ExploreBooks = () => {
 
     const fetchBooks = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/product/');
+            const response = await axios.get('https://bookstoreapp-vftf.onrender.com/product/');
             setBooks(response.data.products);
             setLoading(false);
         } catch (err) {
@@ -30,7 +30,7 @@ const ExploreBooks = () => {
     useEffect(() => {
         const fetchFilteredBooks = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/product/search?search=${searchTerm}`);
+                const response = await axios.get(`https://bookstoreapp-vftf.onrender.com/product/search?search=${searchTerm}`);
                 setBooks(response.data.products);
             } catch (error) {
                 toast.error('Error fetching search results');
@@ -50,7 +50,7 @@ const ExploreBooks = () => {
 
     const addToCart = async (bookId) => {
         try {
-            const response = await axios.post('http://localhost:5000/order/add-to-cart', { userId, productId: bookId });
+            const response = await axios.post('https://bookstoreapp-vftf.onrender.com/order/add-to-cart', { userId, productId: bookId });
             toast.success(response.data.message);
         } catch (error) {
             if (error.response && error.response.status === 400) {

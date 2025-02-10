@@ -10,7 +10,7 @@ export default function AdminOrderDetails() {
 
   const fetchOrderData = async () => {
     try {
-      const response = await fetch("http://localhost:5000/order/");
+      const response = await fetch("https://bookstoreapp-vftf.onrender.com/order/");
       const data = await response.json();
       console.log(data);
       setOrders(data.orders); // Assuming the response contains an array of orders

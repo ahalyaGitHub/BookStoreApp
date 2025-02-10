@@ -13,7 +13,7 @@ export default function AdminDashboard() {
 
   const fetchDashboardData = async () => {
     try {
-      const response = await fetch("http://localhost:5000/admin/dashboard");
+      const response = await fetch("https://bookstoreapp-vftf.onrender.com/admin/dashboard");
       const data = await response.json();
       setUserCount(data.userCount);
       setSellerCount(data.sellerCount);

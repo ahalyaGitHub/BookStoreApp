@@ -26,7 +26,7 @@ export default function SellerBooksPage() {
     // Fetch seller's books
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/product/seller/${sellerId}`)
+            .get(`https://bookstoreapp-vftf.onrender.com/product/seller/${sellerId}`)
             .then((response) => setBooks(response.data))
             .catch((error) => console.error(error));
     }, [sellerId]);
@@ -51,7 +51,7 @@ export default function SellerBooksPage() {
         }
         data.append('sellerId', sellerId);
 
-        const url = editMode ? `http://localhost:5000/product/${editingBookId}` : 'http://localhost:5000/product/';
+        const url = editMode ? `https://bookstoreapp-vftf.onrender.com/product/${editingBookId}` : 'https://bookstoreapp-vftf.onrender.com/product/';
         const method = editMode ? 'put' : 'post';
 
         axios[method](url, data)
@@ -81,7 +81,7 @@ export default function SellerBooksPage() {
     // Handle book deletion
     const handleDelete = (id) => {
         axios
-            .delete(`http://localhost:5000/product/${id}`)
+            .delete(`https://bookstoreapp-vftf.onrender.com/product/${id}`)
             .then(() => setBooks((prev) => prev.filter((book) => book._id !== id)))
             .catch((error) => console.error(error));
     };

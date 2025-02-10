@@ -18,7 +18,7 @@ export default function SellerDashboard() {
 
   const fetchProductData = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/product/count/${sellerId}`);
+      const response = await fetch(`https://bookstoreapp-vftf.onrender.com/product/count/${sellerId}`);
       const data = await response.json();
       setProductCount(data.productCount);
 
@@ -31,7 +31,7 @@ export default function SellerDashboard() {
 
   const fetchOrderData = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/order/count/${sellerId}`);
+      const response = await fetch(`https://bookstoreapp-vftf.onrender.com/order/count/${sellerId}`);
       const data = await response.json();
       setOrderCount(data.orderCount);
 

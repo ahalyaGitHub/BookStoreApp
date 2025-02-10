@@ -28,7 +28,7 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`http://localhost:5000/${formData.role === "User" ? "user" : "seller"}/signup`, formData);
+            const response = await axios.post(`https://bookstoreapp-vftf.onrender.com/${formData.role === "User" ? "user" : "seller"}/signup`, formData);
             toast.success(response.data.message);
             console.log('Signup successful', response.data);
         } catch (error) {

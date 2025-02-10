@@ -10,13 +10,13 @@ export default function AdminProductDetails() {
 
   const fetchProductData = async () => {
     try {
-      const response = await fetch("http://localhost:5000/product/");
+      const response = await fetch("https://bookstoreapp-vftf.onrender.com/product/");
       const data = await response.json();
       console.log(data);
 
       // Fetch seller data based on sellerId
       const sellerPromises = data.products.map((product) =>
-        fetch(`http://localhost:5000/seller/${product.sellerId}`)
+        fetch(`https://bookstoreapp-vftf.onrender.com/seller/${product.sellerId}`)
           .then((res) => res.json())
           .then((sellerData) => ({
             ...product,

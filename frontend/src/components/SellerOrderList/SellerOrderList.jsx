@@ -12,7 +12,7 @@ export default function SellerOrdersPage() {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/order/seller/${sellerId}`)
+            .get(`https://bookstoreapp-vftf.onrender.com/order/seller/${sellerId}`)
             .then((response) => setOrders(response.data))
             .catch((error) => console.error('Error fetching orders:', error));
     }, [sellerId]);

@@ -10,7 +10,7 @@ export default function AdminSellerDetails() {
 
   const fetchSellerData = async () => {
     try {
-      const response = await fetch("http://localhost:5000/seller/");
+      const response = await fetch("https://bookstoreapp-vftf.onrender.com/seller/");
       const data = await response.json();
       setSellers(data.sellers); // Assuming the response contains an array of sellers
     } catch (error) {

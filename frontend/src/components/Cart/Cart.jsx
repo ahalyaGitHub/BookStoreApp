@@ -18,7 +18,7 @@ const Cart = () => {
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/order/${userId}/cart`);
+        const response = await axios.get(`https://bookstoreapp-vftf.onrender.com/order/${userId}/cart`);
         setCartItems(response.data);
         setLoading(false);
         calculateTotalAmount(response.data);
@@ -33,7 +33,7 @@ const Cart = () => {
 
   const removeFromCart = async (orderId) => {
     try {
-      await axios.delete('http://localhost:5000/order/remove-from-cart', { data: { orderId, userId } });
+      await axios.delete('https://bookstoreapp-vftf.onrender.com/order/remove-from-cart', { data: { orderId, userId } });
       const updatedCartItems = cartItems.filter((item) => item._id !== orderId);
       setCartItems(updatedCartItems);
       calculateTotalAmount(updatedCartItems);
@@ -62,7 +62,7 @@ const Cart = () => {
 
   const placeOrderBackend = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/order/place-order', { userId, cartItems });
+      const response = await axios.post('https://bookstoreapp-vftf.onrender.com/order/place-order', { userId, cartItems });
       toast.success('Order placed successfully!');
       setCartItems([]); // Clear cart after order placement
       setTotalAmount(0); // Reset total
