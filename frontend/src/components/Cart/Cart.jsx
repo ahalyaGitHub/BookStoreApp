@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-import { jwtDecode } from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 import 'react-toastify/dist/ReactToastify.css';
 import Nav from '../Navbar/Nav';
 
@@ -12,7 +12,7 @@ const Cart = () => {
   const [totalAmount, setTotalAmount] = useState(0);
 
   const token = localStorage.getItem('token');
-  const decoded = { jwtDecode }(token);
+  const decoded = jwtDecode(token);
   const userId = decoded.id; // Replace with the actual user ID
 
   useEffect(() => {

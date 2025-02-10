@@ -8,9 +8,10 @@ export default function Nav() {
         <nav className="bg-gray-800 text-white">
             <div className="container mx-auto flex justify-between items-center p-6">
                 {/* Bookstore Name */}
-                <div className="text-2xl font-bold">
-                    <Link to="/">BOOK STORE</Link>
-                </div>
+                <Link to="/" className="flex flex-row gap-2 text-3xl font-bold justify-center items-center">
+                    <img src="/books.png" alt="logo" width={35} />
+                    <p>BOOK BAZAAR</p>
+                </Link>
 
                 {/* Hamburger Icon */}
                 <div className="md:hidden">
@@ -39,7 +40,7 @@ export default function Nav() {
                 <div
                     className={`md:flex items-center space-x-6 ${isOpen ? "block" : "hidden"
                         } md:block`}
-                >                   
+                >
                 </div>
             </div>
         </nav>

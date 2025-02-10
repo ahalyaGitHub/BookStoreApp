@@ -13,7 +13,7 @@ const ExploreBooks = () => {
     const [searchTerm, setSearchTerm] = useState("");
 
     const token = localStorage.getItem('token');
-    const decoded = { jwtDecode }(token);
+    const decoded = jwtDecode(token);
     const userId = decoded.id;
 
     const fetchBooks = async () => {
@@ -51,7 +51,7 @@ const ExploreBooks = () => {
     const addToCart = async (bookId) => {
         try {
             const response = await axios.post('http://localhost:5000/order/add-to-cart', { userId, productId: bookId });
-            toast.success(response.data.message); 
+            toast.success(response.data.message);
         } catch (error) {
             if (error.response && error.response.status === 400) {
                 toast.error(error.response.data.message);
@@ -69,9 +69,10 @@ const ExploreBooks = () => {
             <ToastContainer />
             <nav className="bg-gray-800 text-white">
                 <div className="container mx-auto flex justify-between items-center p-6">
-                    <div className="text-2xl font-bold">
-                        <Link to="/">BOOK STORE</Link>
-                    </div>
+                    <Link to="/" className="flex flex-row gap-2 text-3xl font-bold justify-center items-center">
+                        <img src="/public/books.png" alt="logo" width={35}  />
+                        <p>BOOK BAZAAR</p>
+                    </Link>
 
                     <Link
                         to="/cart"

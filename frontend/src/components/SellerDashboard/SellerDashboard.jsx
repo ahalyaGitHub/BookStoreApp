@@ -13,7 +13,7 @@ export default function SellerDashboard() {
   }, []);
 
   const token = localStorage.getItem('token');
-  const decoded = { jwtDecode }(token);
+  const decoded = jwtDecode(token);
   const sellerId = decoded.id;
 
   const fetchProductData = async () => {
