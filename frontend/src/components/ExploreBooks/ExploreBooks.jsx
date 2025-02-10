@@ -70,7 +70,7 @@ const ExploreBooks = () => {
             <nav className="bg-gray-800 text-white">
                 <div className="container mx-auto flex justify-between items-center p-6">
                     <Link to="/" className="flex flex-row gap-2 text-3xl font-bold justify-center items-center">
-                        <img src="/public/books.png" alt="logo" width={35}  />
+                        <img src="/books.png" alt="logo" width={35}  />
                         <p>BOOK BAZAAR</p>
                     </Link>
 

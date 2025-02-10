@@ -88,9 +88,42 @@ const getAllUsers = async (req, res) => {
     }
 };
 
+const searchUsers = async (req, res) => {
+    const searchQuery = req.query.search;
+  
+    if (!searchQuery) {
+      return res.status(400).json({ error: "Search query is required" });
+    }
+  
+    try {
+      // Build the search conditions dynamically
+      const searchConditions = {
+        $or: [
+          { name: { $regex: searchQuery, $options: "i" } },
+          { email: { $regex: searchQuery, $options: "i" } },
+          { address: { $regex: searchQuery, $options: "i" } },
+        ],
+      };
+  
+      const users = await User.find(searchConditions).select("-password");
+  
+      if (!users.length) {
+        return res.status(404).json({ message: "No matching users found" });
+      }
+  
+      res.status(200).json({ users });
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      res.status(500).json({ error: "An error occurred while fetching users" });
+    }
+  };
+  
+
+
 module.exports = {
     loginUser,
     addUser,
     fetchUser,
-    getAllUsers
+    getAllUsers,
+    searchUsers,
 };

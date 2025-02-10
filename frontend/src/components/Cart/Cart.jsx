@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-import {jwtDecode} from 'jwt-decode';
 import 'react-toastify/dist/ReactToastify.css';
+import { jwtDecode } from 'jwt-decode';
 import Nav from '../Navbar/Nav';
 
 const Cart = () => {
@@ -10,10 +10,13 @@ const Cart = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [totalAmount, setTotalAmount] = useState(0);
+  const [showConfirmationCard, setShowConfirmationCard] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState('');
+  const [isConfirmOrderEnabled, setConfirmOrderEnabled] = useState(false);
 
   const token = localStorage.getItem('token');
   const decoded = jwtDecode(token);
-  const userId = decoded.id; // Replace with the actual user ID
+  const userId = decoded.id;
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -27,7 +30,6 @@ const Cart = () => {
         setLoading(false);
       }
     };
-
     fetchCartItems();
   }, []);
 
@@ -49,24 +51,28 @@ const Cart = () => {
     setTotalAmount(total);
   };
 
+  const handlePaymentMethodChange = (method) => {
+    setPaymentMethod(method);
+    setConfirmOrderEnabled(true);
+  };
+
   const placeOrder = () => {
     if (totalAmount === 0) {
       toast.error('Your cart is empty. Please add some items to place an order.');
     } else {
-      const confirmPlaceOrder = window.confirm('Are you sure you want to place the order?');
-      if (confirmPlaceOrder) {
-        placeOrderBackend();
-      }
+      setShowConfirmationCard(true);
     }
   };
 
-  const placeOrderBackend = async () => {
+  const confirmOrder = async () => {
     try {
       const response = await axios.post('https://bookstoreapp-vftf.onrender.com/order/place-order', { userId, cartItems });
       toast.success('Order placed successfully!');
-      setCartItems([]); // Clear cart after order placement
-      setTotalAmount(0); // Reset total
-      console.log(response.data);
+      setCartItems([]);
+      setTotalAmount(0);
+      setShowConfirmationCard(false);
+      setPaymentMethod('');
+      setConfirmOrderEnabled(false);
     } catch (err) {
       console.error('Failed to place order', err);
       toast.error('Failed to place the order');
@@ -120,6 +126,40 @@ const Cart = () => {
             </div>
           </>
         )}
+
+        {showConfirmationCard && (
+          <div className="border p-4 mt-4 shadow-md bg-gray-100">
+            <h2 className="text-xl font-bold mb-2">Confirm Your Order</h2>
+            <p className="mb-4">Total Amount: ₹{totalAmount}</p>
+
+            <div className="mb-4">
+              <label className="block font-medium">
+                Payment Method:
+              </label>
+              <div className="mt-2">
+                <input
+                  type="radio"
+                  id="cashOnDelivery"
+                  name="paymentMethod"
+                  value="Cash on Delivery"
+                  onChange={() => handlePaymentMethodChange('Cash on Delivery')}
+                />
+                <label htmlFor="cashOnDelivery" className="ml-2">
+                  Cash on Delivery
+                </label>
+              </div>
+            </div>
+
+            <button
+              onClick={confirmOrder}
+              className={`py-2 px-4 font-bold ${isConfirmOrderEnabled ? 'bg-green-500 text-white' : 'bg-gray-400 text-gray-600 cursor-not-allowed'}`}
+              disabled={!isConfirmOrderEnabled}
+            >
+              Confirm Order
+            </button>
+          </div>
+        )}
+
         <ToastContainer />
       </div>
     </>

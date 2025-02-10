@@ -68,9 +68,41 @@ const getAllSellers = async (req, res) => {
     }
   };
 
+  const searchSellers = async (req, res) => {
+    const searchQuery = req.query.search;
+  
+    if (!searchQuery) {
+      return res.status(400).json({ error: "Search query is required" });
+    }
+  
+    try {
+      // Build the search conditions dynamically
+      const searchConditions = {
+        $or: [
+          { name: { $regex: searchQuery, $options: "i" } },
+          { email: { $regex: searchQuery, $options: "i" } },
+          { address: { $regex: searchQuery, $options: "i" } },
+        ],
+      };
+  
+      const sellers = await Seller.find(searchConditions).select("-password");
+  
+      if (!sellers.length) {
+        return res.status(404).json({ message: "No matching seller found" });
+      }
+  
+      res.status(200).json({ sellers });
+    } catch (error) {
+      console.error("Error fetching sellers:", error);
+      res.status(500).json({ error: "An error occurred while fetching sellers" });
+    }
+  };
+  
+
 module.exports = {
     addSeller,
     loginSeller,
     fetchSeller,
-    getAllSellers
+    getAllSellers,
+    searchSellers,
 };
